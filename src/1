@@ -1,0 +1,145 @@
+++ QEMU=qemu-system-riscv32
+++ CC=/c/msys64/mingw64/bin/clang
+++ echo '===Test1: minimum flags==='
+===Test1: minimum flags===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 1 FAILED'
+✗ Test 1 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '===Test2: added optimization'
+===Test2: added optimization
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 2 FAILED'
+✗ Test 2 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 3: Add C standard ==='
+=== Test 3: Add C standard ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 3 FAILED'
+✗ Test 3 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 4: Add debug info ==='
+=== Test 4: Add debug info ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 4 FAILED'
+✗ Test 4 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 5: Add warnings ==='
+=== Test 5: Add warnings ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wall -Wextra -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 5 FAILED'
+✗ Test 5 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 6: Add stack protector flag ==='
+=== Test 6: Add stack protector flag ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wall -Wextra -fno-stack-protector -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 6 FAILED'
+✗ Test 6 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 7: Add verbose flag ==='
+=== Test 7: Add verbose flag ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wall -Wextra -fno-stack-protector -v -Wl,-Tkernel.ld -o kernel.elf kernel.c
+clang version 21.1.5
+Target: riscv32-unknown-unknown-elf
+Thread model: posix
+InstalledDir: C:/msys64/mingw64/bin
+ "C:/msys64/mingw64/bin/clang.exe" -cc1 -triple riscv32-unknown-unknown-elf -O2 -emit-obj -dumpdir kernel.elf- -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name kernel.c -mrelocation-model static -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -ffreestanding -nostdsysteminc -target-cpu generic-rv32 -target-feature +m -target-feature +a -target-feature +c -target-feature +zmmul -target-feature +zaamo -target-feature +zalrsc -target-feature +zca -target-feature -b -target-feature -d -target-feature -e -target-feature -f -target-feature -h -target-feature -q -target-feature -sdext -target-feature -sdtrig -target-feature -sha -target-feature -shcounterenw -target-feature -shgatpa -target-feature -shlcofideleg -target-feature -shtvala -target-feature -shvsatpa -target-feature -shvstvala -target-feature -shvstvecd -target-feature -smaia -target-feature -smcdeleg -target-feature -smcntrpmf -target-feature -smcsrind -target-feature -smdbltrp -target-feature -smepmp -target-feature -smmpm -target-feature -smnpm -target-feature -smrnmi -target-feature -smstateen -target-feature -ssaia -target-feature -ssccfg -target-feature -ssccptr -target-feature -sscofpmf -target-feature -sscounterenw -target-feature -sscsrind -target-feature -ssdbltrp -target-feature -ssnpm -target-feature -sspm -target-feature -ssqosid -target-feature -ssstateen -target-feature -ssstrict -target-feature -sstc -target-feature -sstvala -target-feature -sstvecd -target-feature -ssu64xl -target-feature -supm -target-feature -svade -target-feature -svadu -target-feature -svbare -target-feature -svinval -target-feature -svnapot -target-feature -svpbmt -target-feature -svvptc -target-feature -v -target-feature -xandesbfhcvt -target-feature -xandesperf -target-feature -xandesvbfhcvt -target-feature -xandesvdot -target-feature -xandesvpackfph -target-feature -xandesvsintload -target-feature -xcvalu -target-feature -xcvbi -target-feature -xcvbitmanip -target-feature -xcvelw -target-feature -xcvmac -target-feature -xcvmem -target-feature -xcvsimd -target-feature -xmipscbop -target-feature -xmipscmov -target-feature -xmipslsp -target-feature -xsfcease -target-feature -xsfmm128t -target-feature -xsfmm16t -target-feature -xsfmm32a16f -target-feature -xsfmm32a32f -target-feature -xsfmm32a8f -target-feature -xsfmm32a8i -target-feature -xsfmm32t -target-feature -xsfmm64a64f -target-feature -xsfmm64t -target-feature -xsfmmbase -target-feature -xsfvcp -target-feature -xsfvfnrclipxfqf -target-feature -xsfvfwmaccqqq -target-feature -xsfvqmaccdod -target-feature -xsfvqmaccqoq -target-feature -xsifivecdiscarddlone -target-feature -xsifivecflushdlone -target-feature -xtheadba -target-feature -xtheadbb -target-feature -xtheadbs -target-feature -xtheadcmo -target-feature -xtheadcondmov -target-feature -xtheadfmemidx -target-feature -xtheadmac -target-feature -xtheadmemidx -target-feature -xtheadmempair -target-feature -xtheadsync -target-feature -xtheadvdot -target-feature -xventanacondops -target-feature -xwchc -target-feature -za128rs -target-feature -za64rs -target-feature -zabha -target-feature -zacas -target-feature -zama16b -target-feature -zawrs -target-feature -zba -target-feature -zbb -target-feature -zbc -target-feature -zbkb -target-feature -zbkc -target-feature -zbkx -target-feature -zbs -target-feature -zcb -target-feature -zcd -target-feature -zce -target-feature -zcf -target-feature -zclsd -target-feature -zcmop -target-feature -zcmp -target-feature -zcmt -target-feature -zdinx -target-feature -zfa -target-feature -zfbfmin -target-feature -zfh -target-feature -zfhmin -target-feature -zfinx -target-feature -zhinx -target-feature -zhinxmin -target-feature -zic64b -target-feature -zicbom -target-feature -zicbop -target-feature -zicboz -target-feature -ziccamoa -target-feature -ziccamoc -target-feature -ziccif -target-feature -zicclsm -target-feature -ziccrse -target-feature -zicntr -target-feature -zicond -target-feature -zicsr -target-feature -zifencei -target-feature -zihintntl -target-feature -zihintpause -target-feature -zihpm -target-feature -zilsd -target-feature -zimop -target-feature -zk -target-feature -zkn -target-feature -zknd -target-feature -zkne -target-feature -zknh -target-feature -zkr -target-feature -zks -target-feature -zksed -target-feature -zksh -target-feature -zkt -target-feature -ztso -target-feature -zvbb -target-feature -zvbc -target-feature -zve32f -target-feature -zve32x -target-feature -zve64d -target-feature -zve64f -target-feature -zve64x -target-feature -zvfbfmin -target-feature -zvfbfwma -target-feature -zvfh -target-feature -zvfhmin -target-feature -zvkb -target-feature -zvkg -target-feature -zvkn -target-feature -zvknc -target-feature -zvkned -target-feature -zvkng -target-feature -zvknha -target-feature -zvknhb -target-feature -zvks -target-feature -zvksc -target-feature -zvksed -target-feature -zvksg -target-feature -zvksh -target-feature -zvkt -target-feature -zvl1024b -target-feature -zvl128b -target-feature -zvl16384b -target-feature -zvl2048b -target-feature -zvl256b -target-feature -zvl32768b -target-feature -zvl32b -target-feature -zvl4096b -target-feature -zvl512b -target-feature -zvl64b -target-feature -zvl65536b -target-feature -zvl8192b -target-feature -experimental-p -target-feature -experimental-smctr -target-feature -experimental-ssctr -target-feature -experimental-svukte -target-feature -experimental-xqccmp -target-feature -experimental-xqcia -target-feature -experimental-xqciac -target-feature -experimental-xqcibi -target-feature -experimental-xqcibm -target-feature -experimental-xqcicli -target-feature -experimental-xqcicm -target-feature -experimental-xqcics -target-feature -experimental-xqcicsr -target-feature -experimental-xqciint -target-feature -experimental-xqciio -target-feature -experimental-xqcilb -target-feature -experimental-xqcili -target-feature -experimental-xqcilia -target-feature -experimental-xqcilo -target-feature -experimental-xqcilsm -target-feature -experimental-xqcisim -target-feature -experimental-xqcisls -target-feature -experimental-xqcisync -target-feature -experimental-xrivosvisni -target-feature -experimental-xrivosvizip -target-feature -experimental-xsfmclic -target-feature -experimental-xsfsclic -target-feature -experimental-zalasr -target-feature -experimental-zicfilp -target-feature -experimental-zicfiss -target-feature -experimental-zvbc32e -target-feature -experimental-zvkgs -target-feature -experimental-zvqdotq -target-feature +relax -target-abi ilp32 -debug-info-kind=constructor -dwarf-version=5 -debugger-tuning=gdb -fdebug-compilation-dir=D:/wearesoback/RISCV-OS/src -v -fcoverage-compilation-dir=D:/wearesoback/RISCV-OS/src -resource-dir C:/msys64/mingw64/lib/clang/21 -internal-isystem C:/msys64/mingw64/lib/clang/21/include -internal-isystem C:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/include -Wall -Wextra -std=c11 -ferror-limit 19 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -vectorize-loops -vectorize-slp -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o C:/msys64/tmp/kernel-719b19.o -x c kernel.c
+clang -cc1 version 21.1.5 based upon LLVM 21.1.5 default target x86_64-w64-windows-gnu
+ignoring nonexistent directory "C:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/include"
+ignoring duplicate directory "C:/msys64/mingw64/lib/clang/21/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ C:/msys64/mingw64/lib/clang/21/include
+End of search list.
+ "C:/msys64/mingw64/bin/ld" -Bstatic -m elf32lriscv -X -LC:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/lib -LC:/msys64/mingw64/lib/clang/21/lib/riscv32-unknown-unknown-elf -LC:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/lib -Tkernel.ld C:/msys64/tmp/kernel-719b19.o -o kernel.elf
+C:/msys64/mingw64/bin/ld: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 7 FAILED'
+✗ Test 7 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 8: Add fuse-ld=bfd ==='
+=== Test 8: Add fuse-ld=bfd ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wall -Wextra -fno-stack-protector -fuse-ld=bfd -Wl,-Tkernel.ld -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld.bfd: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 8 FAILED'
+✗ Test 8 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 9: Add map file ==='
+=== Test 9: Add map file ===
+++ /c/msys64/mingw64/bin/clang --target=riscv32-unknown-elf -ffreestanding -nostdlib -O2 -std=c11 -g3 -Wall -Wextra -fno-stack-protector -fuse-ld=bfd -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf kernel.c
+C:/msys64/mingw64/bin/ld.bfd: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 9 FAILED'
+✗ Test 9 FAILED
+++ rm -f kernel.elf
+++ echo ''
+
+++ echo '=== Test 10: ALL FLAGS (original) ==='
+=== Test 10: ALL FLAGS (original) ===
+++ CFLAGS='-std=c11 -O2 -v -g3 -Wall -Wextra --target=riscv32-unknown-elf -fuse-ld=bfd -fno-stack-protector -ffreestanding -nostdlib'
+++ /c/msys64/mingw64/bin/clang -std=c11 -O2 -v -g3 -Wall -Wextra --target=riscv32-unknown-elf -fuse-ld=bfd -fno-stack-protector -ffreestanding -nostdlib -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf kernel.c
+clang version 21.1.5
+Target: riscv32-unknown-unknown-elf
+Thread model: posix
+InstalledDir: C:/msys64/mingw64/bin
+ "C:/msys64/mingw64/bin/clang.exe" -cc1 -triple riscv32-unknown-unknown-elf -O2 -emit-obj -dumpdir kernel.elf- -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name kernel.c -mrelocation-model static -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -ffreestanding -nostdsysteminc -target-cpu generic-rv32 -target-feature +m -target-feature +a -target-feature +c -target-feature +zmmul -target-feature +zaamo -target-feature +zalrsc -target-feature +zca -target-feature -b -target-feature -d -target-feature -e -target-feature -f -target-feature -h -target-feature -q -target-feature -sdext -target-feature -sdtrig -target-feature -sha -target-feature -shcounterenw -target-feature -shgatpa -target-feature -shlcofideleg -target-feature -shtvala -target-feature -shvsatpa -target-feature -shvstvala -target-feature -shvstvecd -target-feature -smaia -target-feature -smcdeleg -target-feature -smcntrpmf -target-feature -smcsrind -target-feature -smdbltrp -target-feature -smepmp -target-feature -smmpm -target-feature -smnpm -target-feature -smrnmi -target-feature -smstateen -target-feature -ssaia -target-feature -ssccfg -target-feature -ssccptr -target-feature -sscofpmf -target-feature -sscounterenw -target-feature -sscsrind -target-feature -ssdbltrp -target-feature -ssnpm -target-feature -sspm -target-feature -ssqosid -target-feature -ssstateen -target-feature -ssstrict -target-feature -sstc -target-feature -sstvala -target-feature -sstvecd -target-feature -ssu64xl -target-feature -supm -target-feature -svade -target-feature -svadu -target-feature -svbare -target-feature -svinval -target-feature -svnapot -target-feature -svpbmt -target-feature -svvptc -target-feature -v -target-feature -xandesbfhcvt -target-feature -xandesperf -target-feature -xandesvbfhcvt -target-feature -xandesvdot -target-feature -xandesvpackfph -target-feature -xandesvsintload -target-feature -xcvalu -target-feature -xcvbi -target-feature -xcvbitmanip -target-feature -xcvelw -target-feature -xcvmac -target-feature -xcvmem -target-feature -xcvsimd -target-feature -xmipscbop -target-feature -xmipscmov -target-feature -xmipslsp -target-feature -xsfcease -target-feature -xsfmm128t -target-feature -xsfmm16t -target-feature -xsfmm32a16f -target-feature -xsfmm32a32f -target-feature -xsfmm32a8f -target-feature -xsfmm32a8i -target-feature -xsfmm32t -target-feature -xsfmm64a64f -target-feature -xsfmm64t -target-feature -xsfmmbase -target-feature -xsfvcp -target-feature -xsfvfnrclipxfqf -target-feature -xsfvfwmaccqqq -target-feature -xsfvqmaccdod -target-feature -xsfvqmaccqoq -target-feature -xsifivecdiscarddlone -target-feature -xsifivecflushdlone -target-feature -xtheadba -target-feature -xtheadbb -target-feature -xtheadbs -target-feature -xtheadcmo -target-feature -xtheadcondmov -target-feature -xtheadfmemidx -target-feature -xtheadmac -target-feature -xtheadmemidx -target-feature -xtheadmempair -target-feature -xtheadsync -target-feature -xtheadvdot -target-feature -xventanacondops -target-feature -xwchc -target-feature -za128rs -target-feature -za64rs -target-feature -zabha -target-feature -zacas -target-feature -zama16b -target-feature -zawrs -target-feature -zba -target-feature -zbb -target-feature -zbc -target-feature -zbkb -target-feature -zbkc -target-feature -zbkx -target-feature -zbs -target-feature -zcb -target-feature -zcd -target-feature -zce -target-feature -zcf -target-feature -zclsd -target-feature -zcmop -target-feature -zcmp -target-feature -zcmt -target-feature -zdinx -target-feature -zfa -target-feature -zfbfmin -target-feature -zfh -target-feature -zfhmin -target-feature -zfinx -target-feature -zhinx -target-feature -zhinxmin -target-feature -zic64b -target-feature -zicbom -target-feature -zicbop -target-feature -zicboz -target-feature -ziccamoa -target-feature -ziccamoc -target-feature -ziccif -target-feature -zicclsm -target-feature -ziccrse -target-feature -zicntr -target-feature -zicond -target-feature -zicsr -target-feature -zifencei -target-feature -zihintntl -target-feature -zihintpause -target-feature -zihpm -target-feature -zilsd -target-feature -zimop -target-feature -zk -target-feature -zkn -target-feature -zknd -target-feature -zkne -target-feature -zknh -target-feature -zkr -target-feature -zks -target-feature -zksed -target-feature -zksh -target-feature -zkt -target-feature -ztso -target-feature -zvbb -target-feature -zvbc -target-feature -zve32f -target-feature -zve32x -target-feature -zve64d -target-feature -zve64f -target-feature -zve64x -target-feature -zvfbfmin -target-feature -zvfbfwma -target-feature -zvfh -target-feature -zvfhmin -target-feature -zvkb -target-feature -zvkg -target-feature -zvkn -target-feature -zvknc -target-feature -zvkned -target-feature -zvkng -target-feature -zvknha -target-feature -zvknhb -target-feature -zvks -target-feature -zvksc -target-feature -zvksed -target-feature -zvksg -target-feature -zvksh -target-feature -zvkt -target-feature -zvl1024b -target-feature -zvl128b -target-feature -zvl16384b -target-feature -zvl2048b -target-feature -zvl256b -target-feature -zvl32768b -target-feature -zvl32b -target-feature -zvl4096b -target-feature -zvl512b -target-feature -zvl64b -target-feature -zvl65536b -target-feature -zvl8192b -target-feature -experimental-p -target-feature -experimental-smctr -target-feature -experimental-ssctr -target-feature -experimental-svukte -target-feature -experimental-xqccmp -target-feature -experimental-xqcia -target-feature -experimental-xqciac -target-feature -experimental-xqcibi -target-feature -experimental-xqcibm -target-feature -experimental-xqcicli -target-feature -experimental-xqcicm -target-feature -experimental-xqcics -target-feature -experimental-xqcicsr -target-feature -experimental-xqciint -target-feature -experimental-xqciio -target-feature -experimental-xqcilb -target-feature -experimental-xqcili -target-feature -experimental-xqcilia -target-feature -experimental-xqcilo -target-feature -experimental-xqcilsm -target-feature -experimental-xqcisim -target-feature -experimental-xqcisls -target-feature -experimental-xqcisync -target-feature -experimental-xrivosvisni -target-feature -experimental-xrivosvizip -target-feature -experimental-xsfmclic -target-feature -experimental-xsfsclic -target-feature -experimental-zalasr -target-feature -experimental-zicfilp -target-feature -experimental-zicfiss -target-feature -experimental-zvbc32e -target-feature -experimental-zvkgs -target-feature -experimental-zvqdotq -target-feature +relax -target-abi ilp32 -debug-info-kind=constructor -dwarf-version=5 -debugger-tuning=gdb -fdebug-compilation-dir=D:/wearesoback/RISCV-OS/src -v -fcoverage-compilation-dir=D:/wearesoback/RISCV-OS/src -resource-dir C:/msys64/mingw64/lib/clang/21 -internal-isystem C:/msys64/mingw64/lib/clang/21/include -internal-isystem C:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/include -Wall -Wextra -std=c11 -ferror-limit 19 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -vectorize-loops -vectorize-slp -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o C:/msys64/tmp/kernel-2c71d5.o -x c kernel.c
+clang -cc1 version 21.1.5 based upon LLVM 21.1.5 default target x86_64-w64-windows-gnu
+ignoring nonexistent directory "C:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/include"
+ignoring duplicate directory "C:/msys64/mingw64/lib/clang/21/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ C:/msys64/mingw64/lib/clang/21/include
+End of search list.
+ "C:/msys64/mingw64/bin/ld.bfd" -Bstatic -m elf32lriscv -X -LC:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/lib -LC:/msys64/mingw64/lib/clang/21/lib/riscv32-unknown-unknown-elf -LC:/msys64/mingw64/bin/../lib/clang-runtimes/riscv32-unknown-elf/lib -Tkernel.ld -Map=kernel.map C:/msys64/tmp/kernel-2c71d5.o -o kernel.elf
+C:/msys64/mingw64/bin/ld.bfd: unrecognised emulation mode: elf32lriscv
+Supported emulations: i386pep i386pe
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+++ echo '✗ Test 10 FAILED'
+✗ Test 10 FAILED
+++ echo ''
+
+++ echo '=== SUMMARY ==='
+=== SUMMARY ===
+++ echo 'The first test that fails is the problematic flag!'
+The first test that fails is the problematic flag!
+++ qemu-system-riscv32 -machine virt -bios default -nographic -serial mon:stdio --no-reboot -kernel kernel.elf
+kernel.elf: No such file or directory
+C:\msys64\mingw64\bin\qemu-system-riscv32.exe: could not load kernel 'kernel.elf'
