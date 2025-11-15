@@ -15,6 +15,8 @@ typedef uint32_t vaddr_t;
 #define align_up(value, align)   __builtin_align_up(value, align)
 #define is_aligned(value, align) __builtin_is_aligned(value, align)
 #define offsetof(type, member)   __builtin_offsetof(type, member)
+#define PAGE_SIZE 4096
+
 
 #define va_list  __builtin_va_list
 #define va_start __builtin_va_start
